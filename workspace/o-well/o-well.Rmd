@@ -1,10 +1,9 @@
 ---
-title: "R Notebook"
+title: "o-well"
 output: html_notebook
 ---
 
 ```{r, eval=FALSE} 
-#this code chunk contains the functions that will be necessary to reading and analyzing the text documents
 
 which.github = "local"; #determines whether local or remote github is being used (this case will use local)
 
@@ -22,32 +21,84 @@ if(which.github == "remote")
           }
 
 
-path.oWellData = paste0(mypath, "o-well/");
+path.oWellData = paste0(mypath, "o-well/"); # creates path to o-well folder in datasets
 ```
 
-
+In order to do data analytics, data must first be available. Reading the data into R is completed in the following code chunk:
 
 
 ```{r, include=TRUE}
 library(tabulizer); # allows for code to read info from PDF's
 
-dataWellPDF = paste0(path.oWellData, "Well-23.pdf");
-dataWell = extract_tables(dataWellPDF);
-owell.metals = data.frame(dataWell[1]);
-owell.chemistry = data.frame(dataWell[2]);
-names(owell.metals) <- owell.metals[1,];
+dataWellPDF = paste0(path.oWellData, "Well-23.pdf"); #creates a variable for the Well-23.PDF file that resides in path.oWellData 
+dataWell = extract_tables(dataWellPDF); #a tabulizer function that extracts tables from a PDF, which are stored in the variable dataWell
+owell.metals = data.frame(dataWell[1]); #assigns the first table (metal info) stored in dataWell to a data frame
+owell.chemistry = data.frame(dataWell[2]); #assigns the second table (chemistry info) stored in dataWell to a data frame
+names(owell.metals) <- owell.metals[1,]; 
 names(owell.chemistry) <- owell.chemistry[1,];
+#Takes the first row of each data frame and sets it as a column header
 owell.metals <- owell.metals[-1];
 owell.chemistry <- owell.chemistry[-1];
+#Since column headers were created from the first row in the data frame, two identical rows now exist. This code removes row 1 from each data frame, which is the non-column header version
 owell.metals = owell.metals[-c(1,2,26,27,28,29,30,31),];
 owell.chemistry <- owell.chemistry [-c(1,2,20,21,22,23,29,30,31,32),];
+#Removes rows from the data frames that housed no info or irrelevant info
 rownames(owell.metals) = NULL;
 rownames(owell.chemistry) = NULL;
+#Resets the numbering of each row, as removing rows modifies the number of the row past the deletion point
 print(owell.metals);
 print(owell.chemistry);
+#prints the data frames that hold the metal and chemistry information regarding the wells
+```
 
+Now that data frames exist containing the metal and chemical information of the wells, the location of the wells can be added to each as a column. The following code chunk details this procedure:
 
+```{r, include=TRUE}
+wellLocation = read.table(paste0(path.oWellData, "wells-location.txt"), sep = "|"); #reads the data in the wells-location.txt file found in the oWellData path, stores in variable wellLocation. Values are separated with "|" in the text doc, so the read.table function is told to count a | as a separation
+names(wellLocation) <- wellLocation[1,];
+wellLocation = wellLocation[-c(1),];
+rownames(wellLocation) = NULL;
+#These steps accomplish the same thing that occurred in the last code chunk by creating table headers for the data and removing any duplicate or unnecessary info 
+owell.metals <- cbind.data.frame(owell.metals, wellLocation);
+owell.chemistry <- cbind.data.frame(owell.chemistry, wellLocation);
+#Adds the location data to each data frame as a column
+print(owell.metals);
+print(owell.chemistry);
+```
 
+Following a nearly identical procedure, geology data can also be added to the data frames as seen in the following code chunk:
 
+```{r, include=TRUE}
+wellGeology = read.table(paste0(path.oWellData, "geology.txt"),sep = '\n'); #reads geology data
+names(wellGeology) <- wellGeology[1,];
+wellGeology = wellGeology[-c(1),];
+rownames(wellGeology) = NULL;
+#creates column headers and trims extra row
+owell.metals <- cbind.data.frame(owell.metals, wellGeology);
+owell.chemistry <- cbind.data.frame(owell.chemistry, wellGeology);
+#adds geology data to data frames
+print(owell.metals);
+print(owell.chemistry);
+```
 
+Adding the proximity to geographical faults follows the same procedure as adding geology or location data. However, some explanation of the following fault data -- and how it was obtained -- is required. A map with well locations and geographical faults was provided. By measuring the number of pixels in the scale on the image, a meter value can be assigned to the distance of each pixel. 10,000 meters on the scale was measured to be 53 pixels in an image editor, meaning each pixel is approximately 188.7 meters. The coordinates of the center of each well, and the coordinates of the nearest fault line, were then recorded. The boundary with the gulf was considered as a fault, as salt water contamination is a serious issue when studying wells. Once the pixel coordinates of each well and its corresponding fault line were recorded, the distance could from the well to the fault was determined using the Pythagorean theorem to calculate the magnitude of the vector based off the x and y differences. This determined the number of pixels each well was from the nearest fault. This could then be converted to meters with the previous relation of 188.7 meters per pixel. This data is very inaccurate, as the supplied image with well location and fault locations were not high resolution. An image file can not be measured at a smaller unit than the pixel, meaning non integer pixel counts can not exist. Since the image had a low number of pixels, measuring occurred in 200 meter steps, resulting in very inaccurate results. The values were truncated to the nearest meter, but have a tolerance of +- 200 m to account for potential user errors when recording the pixel locations. 
+```{r, include=TRUE}
+wellFault = read.table(paste0(path.oWellData, "fault.txt"),);
+names(wellFault) <- wellFault[1,];
+wellFault = wellFault[-c(1),];
+rownames(wellFault) = NULL;
+owell.metals <- cbind.data.frame(owell.metals, wellFault);
+owell.chemistry <- cbind.data.frame(owell.chemistry, wellFault);
+print(owell.metals);
+print(owell.chemistry);
+```
+
+Now that all relevant well data has been incorporated into the data frames, a list can be generated and saved in an RDS format. This process can be done as detailed by the following code chunk:
+
+```{r, include=TRUE}
+listWellDF = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$chemistry"=owell.metals);
+#creates a list that contains all the information present in each data frame
+print(listWellDF);
+saveRDS(listWellDF, file = "wells.rds"); # saves a RDS file named "wells.rds"
+readRDS(file = "wells.rds"); # reads the RDS file
 ```
