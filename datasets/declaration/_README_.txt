@@ -8,4 +8,3 @@ draft.txt
 https://www.loc.gov/exhibits/declara/ruffdrft.html
 
 
- 

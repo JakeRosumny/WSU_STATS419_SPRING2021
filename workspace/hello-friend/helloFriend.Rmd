@@ -1,0 +1,134 @@
+---
+title: "helloFriendJakeRosumny"
+author: "Jake Rosumny"
+date: "2/1/2021"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '6'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    fig_caption: yes
+    number_sections: no
+email: jacob.rosumny@wsu.edu
+params:
+  knitChunkSetEcho: yes
+  knitChunkSetWarning: no
+  knitChunkSetMessage: yes
+  knitChunkSetCache: yes
+  knitChunkSetFigPath: graphics/
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(datasets);
+library(knitr);
+library(ggplot2);
+library(png);
+library(jpeg);
+```
+# ABSTRACT
+
+My name is Jake Rosumny, and I am twenty-two years old. I was born into a steady home life that promoted creativity and compassion, producing a (relatively) well adjusted adult human being. I excelled through high school with relative ease, developing only a handful of character flaws that would disrupt my future development. Higher education at the University of Washington served as a wake-up call for these traits by exposing my lack of responsibility and diligence. A quick travel to Washington State University reinvigorated my childhood passions of engineering and science, where I will graduate with a Bachelor of Science in mechanical engineering and minor in mathematics this spring. Supplemented with years of learning experiences, the knowledge I have gained throughout my education has allowed me to become a bright individual that can contribute to technically demanding situations. With the final months of education in front of me, I plan on diversifying and expanding my skillset as much as possible to prepare for an ever-demanding future.
+
+```{r}
+img1_path <- "images/currentjake.png";
+include_graphics(img1_path);
+```
+
+##### Me a couple of months ago!
+
+***
+
+# INTRODUCTION
+
+For as long as I can remember, I have felt a pull towards technology. Growing up in the 2000’s, technology was thankfully not in short supply. Although my parents were not the most “tech literate” people in the world, many of my early technological exploits occurred away from home, such as playing video games at an elementary school buddy’s house. I quickly bought a laptop as soon as I could save enough birthday funds and built my own computer (that I am writing this report from) with parts I was able to purchase for my “sweet sixteen”. I feel fortunate to have grown up and spent so much time around computers, as they are so integral and fundamental to the way society operates and functions. The COVID-19 pandemic has shoved collective society forward into the digital era, forcing most activities to take place in an online environment. As such, primarily online skillsets have become even more valuable, as future developments will continue to rely on this online infrastructure that has been developed for these current circumstances. My early passion in technology and computers, mixed with success in science and mathematics-based content in elementary and middle school, helped guide the path that has led me to my current location. By discussing my background that led to the person I am today, I hope to not only provide insight of myself to my audience, but to myself as well. This will make it easier to dissect who I am and understand where I want to go.  
+
+***
+
+# THE PAST
+
+### My Early Years
+
+Jacob Scott Rosumny was born on May 6th, 1998 at 6:48 PM in Portland, Oregon.
+
+
+```{r}
+img2_path <- "images/youngjake.png";
+include_graphics(img2_path);
+```
+
+##### Jake's First Day of Kindergarten
+
+The first of two boys to parents Scott and Kathryn, I experienced oldest child syndrome. My parents were often overprotective and overly strict, although I always understood they wanted what was best for me. It could be frustrating to deal with their expression of care however, and I often wished I could have more freedoms as a child. Strictness and care helped me throughout elementary school, as it gave me the support that was needed to have the work ethic to apply my intellect. In fifth grade, I joined an accelerated learning program and throughout middle school I took accelerated classes. While my parents could be stifling at times, they provided an incredibly supportive home life that allowed for my development to occur healthily. I made friends easily in my younger years, although I was not particularly extroverted. I became more introverted in middle school as I struggled with self-esteem issues and other generic adolescent developmental struggles. Computers, particularly multi player video games, provided a social environment for my reclusive younger self to participate in. I was able to stay successful and produce good grades in school, while saving my motivation and energy for important things, like Minecraft. 
+
+### A Path is Seen
+
+In 2011, my Grandpa Roger collapsed and fainted in the bathroom two weeks after having surgery. He was found to have a pulmonary embolism, or a blockage of the pulmonary artery in the lung, that reached into both lungs. The doctor told my mother that there was nothing that could be done, and to begin preparing for the worst. Luckily, my mom was able to call our neighbors, who were both cardiologists and worked for the same hospital. They were able to reach an interventional radiologist and surgeon that were able to break up and remove the clot, saving Roger’s life. Since that moment, there have now been 10 years of time I have had the opportunity to spend with one of my favorite people on this planet. I would not have had this time if our neighbor did not happen to have connections at the hospital. The gravity of the situation had a huge impact on young me, and at that moment I knew I wanted to be a doctor and save people just like they were able to save my grandpa. I continued to focus on STEM related classes with the hope of becoming a cardiologist or radiologist. I had lofty plans to be successful throughout school, and graduate from a prestigious medical school. Then it would be on to saving lives and making huge paychecks. Simple, right?
+
+### Higher Education and Refined Judgement 
+
+I remained on this path throughout high school, focusing on taking as many AP classes as possible, maintaining my 4.0, and expanding my resume. While many high school activities do little more than generate some words for a resume, other activities were beneficial towards shaping my interests. Starting Junior year, I was a part time at a peer-ran tutoring club. I enjoyed the process of helping and teaching people, and noticed it also improved my own learning retention. It also provided a safe space for people to exist at, resulting in a friendly and comfortable environment for people from different backgrounds. I was able to maintain my academic success through high school, graduating 19 out of 527 in my class and keeping my cumulative 4.0 GPA.
+```{r}
+img3_path <- "images/graduatejake.png";
+include_graphics(img3_path);
+```
+
+##### High School Graduate!
+
+I was accepted into the University of Washington with goals of getting into the bioengineering program. The desire to work in the medical field still existed, but there was no desire to go through the medical school process. Engineering seemed like a more practical and enjoyable application of my technical knowledge at that point. While I enjoyed living in Seattle and met lots of great people, I struggled academically, especially as courses continued to get more complex and demanding. Without my parents around to hound me and keep me productive, I struggled with finding the motivation to properly learn school content. With the nature of the UW engineering program being very selective, the stress and competition produced an environment where only the dedicated were successful. I was not dedicated and was only able to produce moderate grades. This issue compounded with specific academic issues produced by a specific professor resulted in a complete destruction of my motivation and put in less and less effort. My grades began to suffer as a result. I decided that I was not happy or comfortable enough in the environment to be successful, instead choosing to transfer to Washington State University at Vancouver and live at home. I dropped out of my spring courses my Sophomore year at UW and moved back home. While academics were not perfect, I did get to experience some amazing extra-curricular activities while living in Seattle. I participated in the Pipeline Project both years there, which connected me with different tutoring opportunities. I tutored at Rainier Beach High School in the Seattle Public School District and Summit Public Schools: Sierra. I mostly focused on physics and math tutoring, but also helped kids prepare for things like college admissions and scholarship applications. Growing up in the Vancouver Washington area, I was not exposed to many different backgrounds or living situations. Tutoring in poor communities in Seattle exposed me to life stories vastly different from that of my own, and really helped broaden my understandings of what the world is like. Tutoring also further developed my senses of compassion and empathy as a growing adult, and further enforced my desire to be in a situation where I could have a tangible impact on other people’s well-being.
+
+***
+
+# THE RECENT PRESENT
+
+### Moving Back to Vancouver
+
+Because I was a transfer student, some things needed to be re-completed at WSU. With the poor performance my last year at UW, this meant that I still had three years of coursework to complete at Washington State, even though I had already spent two years at University. While the campus was much smaller, I found myself enjoying the smaller class sizes and longer class pacing. Working in the mechanical engineering program, I was able to continue to academically improve, with every subsequent term taken having a higher term GPA, with my last term having higher than a 3.5! In the summer of 2019, I was able to obtain a mechanical engineering internship at Lam Research, a company that produces robots to manufacture semiconductor devices for other major companies such as Microsoft and Samsung. While I mostly did CAD work while at Lam, I was exposed to a large amount of highly technical and complex issues that required the manpower and resources of a fortune 500 to manage. Working for such a large company was an incredibly cool experience and helped develop my skills at applying my knowledge towards real world problems. I also had my first experiences with data management solutions, as I had to work on things such as version control and file uploads between multiple different file spaces. I would have had an internship as a Manufacturing Engineer the summer of 2020 at a company called Clean Mark Labels, but the COVID-19 pandemic erased that opportunity from me. 
+
+### Thriving as a Cougar
+
+Becoming a Cougar was good for my mental and emotional health in many ways. Aside from improving my academic situation, I was also able to begin working at my previous summer job part time during school. While Jimmy Johns is not the most glamourous employer, it has allowed me to get experience working as a minimum wage food service employee and have some pocket change. When my internship fell through due to COVID, I was received a promotion at Jimmy Johns to Assistant General Manager of my store, which included a pay raise and full-time hours. I have been working this position since May and am very grateful for experience that is relevant to my career as an employee. Managing a store and team of employees have taught me valuable skills in time management and people management. I also really enjoy the satisfaction of being very knowledgeable and skilled in a work environment. Jimmy Johns has provided me with a great entry level point to develop the critical skills that every job requires from an effective employee. 
+
+While it may not seem like moving back in with your parents would be a good thing for the social life, moving back to Vancouver greatly improved my social situation. A few months after I moved home, I met my now fiancée Hannah. 
+
+```{r}
+img4_path <- "images/jakeandhannah.png";
+include_graphics(img4_path);
+```
+
+##### Hannah and myself after I Proposed! 
+
+We are a great match for each other and complement our respective strengths and weaknesses very well. I have always felt that I have lacked a real “best friend” before meeting her and am so fortunate to have my person that I will spend the rest of my life with. We are in the process of applying for an apartment now and are likely about to adopt a puppy that a friend’s family is about to have! Without moving home from Seattle, I would not have met Hannah and my life would be on a completely different trajectory.
+
+***
+
+# THE UPCOMING FUTURE
+
+### How My Plans have Evolved 
+
+Even though I drifted away from the medical degree path younger-me was so set on, I still have a desire to work in the medical field. I would love to apply my mechanical engineering skills to biologically related problems, such as the medical device field. I feel like working on medical devices would be the perfect marriage of my interests and knowledges. With an original interest in bioengineering, and completion in the track of micro and nano technology, I have a great understanding of how to design machines, as well as an understanding of the principles that are present in electronic devices, such as medical device. Experience at a semiconductor company also develops my skillset at working with and around complex devices. I would love to be able to apply these experiences towards developing or maintaining a equipment that helps improve the lives of others. It seems incredibly promising that I could apply my knowledge towards creating tools that could save lives, just like my grandfather’s life was saved. 
+
+### Broader is not Dreadful
+
+Medical devices seem like a very interesting and worthwhile career path but is far from the only thing I will apply myself towards. After graduation, I plan on applying to anything and everything I am even slightly qualified for. I have experience in CAD and drafting work, as well as experience in many different computer programs related to engineering. Something that could apply these skills would be a natural fit for myself post-graduation and could develop my engineering resume. I also dipped my toes in the manufacturing engineering side of things at Clean Mark and would be interested in finding another opportunity that focused on optimizing a design process. Whether hands on or computer based, I plan on taking whichever opportunities I can find in the increasingly competitive and scarce COVID job market.
+
+### Strategies to Improve the Future
+
+With the limited time left for me in the education system, I plan on diversifying my knowledge and skills as much as possible before graduating. I took the proper mechanical engineering electives to complete a track to help build up the specification of my degree. I took this class so that I could complete my minor in statistics. I am focusing on this class to try to learn data analytics skills, which could specifically be useful in manufacturing engineering where data analysis is at the root of process optimization. The process of learning new technical skills is beneficial in itself – even if I never use R or any of the skills learned in this class – as the process of learning a new language is beneficial to future learning in the brain. I am also taking a class on Finite Element Analysis, specifically within the program called ANSYS. By learning new computer technologies, as well as the many I have exposed myself to previously in academics, I hope to improve my brain’s ability to learn whatever skills I will need to learn at future job opportunities. I also plan to learn and utilize computational fluid dynamics, a module within ANSYS, on my mechanical engineering capstone project. The project is to use additive manufacturing, such as 3-D printing, to aid in the medical issues revolving around the COVID-19 pandemic. By utilizing UVC diodes to emit radiation, we have developed a 3-D printed device that could be attached to ventilators to destroy any airborne contaminants produced by a sick patient, reducing chance of exposure to frontline medical employees. By further developing my computer technology skills, I am showing my drive to better myself as an engineer and as an employee.
+
+***
+
+# CONCLUSION
+
+While life has had its ups and downs, I am incredibly grateful for my upbringing and life so far, as well as the many opportunities I have been afforded. Even though I continue to struggle with self esteem and anxiety issues, I have adapted to an increasingly changing society and have managed to maintain success. This class, as well as others, will continue to provide challenging problems to be solved so that I can continue to develop my problem-solving techniques. I am lucky to have strong self-awareness and technical IQ, which has allowed me to grasp technical concepts that many people find complicated or difficult. I am in a committed and healthy relationship that allows for my emotional side to continue developing, and look forward to eventually applying my technical know-how and people management/empathy skills in a way that can help alleviate some of society’s issues. 
+
+
+
+

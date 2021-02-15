@@ -1,0 +1,39 @@
+---
+title: 'R Notebook: intro'
+author: "Jake S. Rosumny [jacob_rosumny]"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+# github.jake
+which.github = "local"; # local
+github.local = "C:/_git_/github/JakeRosumny/WSU_STATS419_SPRING2021/";
+github.remote = "https://raw..../";
+
+if(which.github == "remote")
+  {
+   include.me = paste0( github.remote, "functions/function-intro.R");
+   library(devtools);
+   source_url(include.me);
+} else {
+          include.me = paste0( github.local, "functions/function-intro.R");
+          source(include.me);
+       }
+
+```
+
+
+# Handshake
+### Alphabet declaration of independence
+##### determinant of 3x3 matrix
+
+$3 \times 3$
+
+
+
+
+
+
+

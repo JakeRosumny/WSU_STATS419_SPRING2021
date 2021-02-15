@@ -1,0 +1,272 @@
+---
+title: "R Intro"
+output: html_notebook
+---
+```{r, include = FALSE}
+library(png);
+library(knitr);
+library(ggplot2);
+library(plotrix);
+```
+
+# **Intro to the R Programming Language**
+##### *Various exercises that help teach fundamental applications of the language*
+***
+
+### Determining the possible number of unique handshakes a group can make
+<center>
+![*Handshakes are great for introductions!*](https://hbr.org/resources/images/article_assets/2020/03/Mar20_12_115049941.jpg)
+
+</center>
+
+
+Interaction between individuals is a keystone of human society. Without the ability to interact and collaborate, humans would not have had the ability to become the omnipresent force on planet Earth. Handshakes are a common formal greeting in the western world and provide an opportunity for two individuals to begin their interaction. While handshakes can be used for any interaction, they almost always accompany a first interaction between two individuals. While it is straightforward to understand that two people can have one handshake, how many unique handshakes could three people have? If a company had an orientation with many employees, how many unique handshakes could occur in the group?    
+
+A mathematical formula can be derived to determine how many $h$ unique handshakes an $n$ number of people could have. This equation can be found to be the following:
+<center> $h =  (n*(n-1))/2$
+
+where $h =$ the number of possible unique handshakes
+
+and $n =$ the number of people handshaking </center>
+
+Using the R language, a function can be made that determines this number of possible unique handshakes from a given input number. A function named handShake can be created and configured to utilize the above formula to determine the amount of handshakes occurring, as seen below:
+
+```{r, eval=FALSE}
+handShake = function(n=1, plotMe=FALSE)
+{
+  h = n*(n-1)/2; #equation to determine unique handshakes
+  return(h); #returns the value of the above equation
+}
+```
+
+As can be seen below, the operation works to determine the unique number of handshakes that can occur in various group sizes. 
+
+```{r, include = TRUE}
+handShake(1); #one person handshaking
+handShake(2); #two people handshaking
+handShake(3); #three people handshaking
+handShake(4); #four people handshaking
+```
+
+Some problems exist with this function, however. Multiple situations can break the code and produce an answer that does not coincide with reality, as can be seen below:
+
+```{r, include = TRUE}
+handShake(0);
+handShake(-1);
+handShake(2.4);
+```
+
+These values do not make physical sense, but still return an answer with the function. While the answer for handShake(0) is technically correct, it does not make sense to consider the case of $n = 0$, as no interaction exists with no people. The code must therefore be updated to account for this circumstance. Negative and non-whole integers also prove to be cases that work in the function but do not make sense in the real world. There cannot be a negative number of people handshaking, nor can there be a non-integer value of people (such as 2.4). The code must also be expanded to deal with these circumstances such that it operates in the same fashion as real people handshaking. The handShake function can be updated as seen below to achieve these effects:
+```{r, eval=FALSE}
+is.wholenumber = function(x, tol = .Machine$double.eps^0.5)
+{
+  abs(x - round(x)) < tol;
+}
+# creates function to determine if n is integer or not
+handShake = function(n=1, plotMe=FALSE)
+{
+  if(n < 1) { stop ("n must be greater than 0");} # warning that value is not greater than zero and cannot work
+  if(!is.wholenumber(n)) { stop("n must be an integer"); } # warning that value is not a whole number and cannot work
+  h = n*(n-1)/2;
+  return (h);
+}
+```
+
+These amendments stop the function if the value of $n$ does not meet the criteria of being a whole, positive integer. The following image demonstrates what occurs when these types of values are input into the function now:
+
+```{r, echo = FALSE}
+img1_path <- "images/error.png";
+include_graphics(img1_path);
+```
+
+Aside from generating the data, R can be used to easily and effectively visualize data as well. The following loop can be created to run the handShake function multiple times and plot the results. 
+
+```{r, eval=FALSE}
+handShake = function(n=1, plotMe=TRUE) # plotMe=TRUE instead of FALSE as previously seen
+{
+  if(n < 1) { stop ("n must be greater than 0");}
+  if(!is.wholenumber(n)) { stop("n must be an integer"); }
+  h = n*(n-1)/2;
+  if(plotMe) #verifies that handShake wants to be plotted
+  {
+    plot(n,h, main = "Unique Handshakes per # of People", xlab = "# of People", ylab = "# of Handshakes"); #plots the data and assigns main/axis titles
+  }
+}
+```
+```{r , include=TRUE, warning=FALSE}
+handShake(1:8);
+```
+This demonstrates how the data produced by the handShake function can be visually displayed in a plot. Further code can be applied to add further features to the plot, such as circles to highlight a specific space:
+
+```{r , include = TRUE, warning=FALSE}
+handShake(1:8);
+r = 0.25
+draw.circle(4,6,r) #creates circle at specific point on plot with designated radius
+```
+
+The plotting code can also be set up in a way that produces lines between the data points. This is as follows:
+
+```{r, eval=FALSE}
+handShake = function(n=1, plotMe=TRUE)
+{
+  if(n < 1) { stop ("n must be greater than 0");}
+  if(!is.wholenumber(n)) { stop("n must be an integer"); }
+  h = n*(n-1)/2;
+  if(plotMe)
+  {
+    plot(n,h, main = "Unique Handshakes per # of People", xlab = "# of People", ylab = "# of Handshakes");
+    lines(n,h); #connects the elements on the plot
+  }
+}
+```
+```{r , echo = FALSE, warning = FALSE}
+handShake(1:8);
+```
+
+This has demonstrated how a function can be created in R, and how that can then be used to create different graphical reports. Creating reports that effectively communicate information is paramount to data analytics, as well as most fields -- including engineering. By using these strategies to create a function and plot its data, different phenomenons or statistical factors can be analyzed and understood. The function of handshakes is also relevant in many different problems, as this formula is the basic formula for unique single interactions between a group. This can therefore be used in many different situations where the same logic applies. 
+
+***
+
+### Reading in the Declaration of Independence
+
+<center>![*Thomas Jefferson, the initial author of the Declaration of Independence*](https://upload.wikimedia.org/wikipedia/commons/b/b1/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29%28cropped%29.jpg)
+
+</center>
+
+While numbers and data are incredibly important in statistical analysis, letters and words are information as well and can also be analyzed. Using R to aid with this type of analysis allows for more efficient and effective work. Two different copies of the declaration of independence shall be read into R. This will allow R to analyze and compare between the two, allowing for differences to be determined. In order to begin determining these differences, the original draft and unanimous (final) draft must be read into R. The first step of this process is to save the data into text documents so that R can read the data. A text document called *draft.txt* contains the initial draft of the Declaration of Independence, while a text document called *final.txt* contains the unanimous final draft that was signed by Congress. These documents will be saved in the local github directory, and the following code can be used to read in the data present in the text documents. 
+
+```{r, eval=FALSE} 
+#this code chunk contains the functions that will be necessary to reading and analyzing the text documents
+
+which.github = "local"; #determines whether local or remote github is being used (this case will use local)
+
+github.local = "C:/_git_/github/JakeRosumny/WSU_STATS419_SPRING2021/" #local directory of github on my PC
+github.remote = "https://github.com/JakeRosumny/WSU_STATS419_SPRING2021/" #remote github directory
+
+# the following if/else loop determines where to call data from depending on if local or remote github is used. 
+if(which.github == "remote")
+{
+  include.me = paste0(github.remote, "functions/function-intro.R");
+  library(devtools);
+  source_url(include.me);
+  } else {
+          include.me = paste0(github.local, "functions/function-intro.R");
+          source(include.me);
+          }
+# In this specific case, the functions-intro.R file can either be pulled from the local github file directory or the remote github repository. It then imports the function and includes the source. Functions can be put into the function-intro.R file, and when it is called from either the remote or local github, the function now exists in the workspace. 
+
+path.declaration = paste0(github.local, "datasets/declaration/"); 
+charInstanceCounter = function(str,letter) #returns number of occurrences of specific character in str
+{
+  nchar(as.character(str)) -nchar(gsub(letter, "", str,fixed=TRUE))
+}
+
+
+atozCounter = function(str)
+{
+  str=gsub("[[:space:]]", "", str) #removes spaces
+  str=tolower(str) #makes all characters lower case
+  df=data.frame(matrix(0, nrow=1, ncol=27, byrow=TRUE)) # creates 1 row by 27 column matrix to store the data from the text documents
+  colnames(df)=c(letters,"OTHER") # gives each column in the df matrix a name based off the letters of the alphabet and one column for other characters
+  for (letter in letters)
+  {
+    idx = which(letters == letter); #creates an index for the column values
+    df[1,idx] = charInstanceCounter(str,letter); #runs charInstanceCounter function to determine the instances of a character in str, then assigns that value to the column the idx is currently on
+    str = gsub(letter,"", str, fixed=TRUE);
+  }
+  df[1,27] = nchar(str); # last column for the other characters seen in the str
+}
+
+
+```
+
+```{r, eval=FALSE}
+draft = readChar(paste0(path.declaration,"draft.txt"),99999); 
+final = readChar(paste0(path.declaration,"final.txt"),99999);
+# creates variables that contain the characters present in the draft.txt and final.txt files
+
+df=NULL; #empties the data frame
+df=rbind(df,atozCounter(draft)); # creates a row in the data frame based off the results of atozCounter on draft variable
+df=rbind(df,atozCounter(final)); # creates a row in the data frame based off the results of atozCounter on final variable
+rownames(df)=c("draft","final"); # assigns names to the rows in the data frame
+```
+```{r}
+print(df); #prints the table that is stored within the data frame
+rownames(df)=c(NULL,NULL); # removes rownames so that they do not saturate the barplot
+barplot(t(df), main="Draft Vs Final", beside=TRUE);
+axisLable <- c(LETTERS[1:26], "Other", "|", LETTERS[1:26], "Other"); #creates bar plot with both draft and final, creates main label
+title(xlab = "Character Counted", ylab = "Number of Characters"); # creates axis labels
+axis(1, 1:56, axisLable[1:56], cex.axis=0.5, gap.axis=0.1); # configures specific value labeling for the letters on bottom of the plot
+```
+
+The figures above demonstrate the differences between the initial and final versions of the Declaration of Independence. The table provides exact values to the audience, demonstrating exactly how many times each character is present in both versions. The barplot visually demonstrates the differences between the two, as the height of each individual bar represents the amount of times that character was counted. This provides some visual information on changes that occurred  between the versions. For example, it can easily be visually determined that the final version is shorter than the original version, due to the fact that nearly every bar on the final barplot is lower than the correspondent bar in the initial barplot. 
+
+The type of learning done in this exercise is very useful to understanding R, and learning tools that are necessary for data analytics within the program. The first part of this problem was to create a dataset that R could then operate off of. By downloading the raw text files, R was used to call the file directory they were present in. The function charInstance provides the basis of the analysis by determining the number of instances of a character within a certain string. atozCounter then utilizes this function to count the specific instances of each character from a to z (other technically is the last column). Functions that parse data are essential to understanding the data, and are used commonly throughout data analytics. By completing this exercise, these skills could be applied to different textual analysis situations, or could be applied to different applications to compare different type of data. Once differences between datasets have been obtained, comparison and analysis can begin. 
+
+***
+
+### Determining a Determinant!
+
+<center>![*Definition of a Determinant in Linear Algebra*](https://i.stack.imgur.com/nO62F.png)
+
+</center>
+
+Matrices allow for data to be stored in two dimensions, instead of one such as a vector. Determinants provide some info on the nature of the values within the matrix, assuming the matrix is square. The following figure details how to solve for the determinant of a 3x3 matrix:
+
+<center>
+
+![*Process to solve for determinant of 3x3 matrix*](https://www.chilimath.com/wp-content/uploads/2018/12/example-1c.png)
+
+</center>
+
+
+A 2x2 matrix is solved by subtracting the products of the diagonals, as seen in the below diagram:
+
+<center>
+
+![*Process to solve for determinant of 2x2 matrix*](https://image1.slideserve.com/2864514/determinant-of-a-2-x-2-matrix-l.jpg)
+
+</center>
+
+
+These steps can be written so that a matrix can be input into R, and a function will automatically compute its determinant. The following code block will create a function that can calculate the determinant of a 3x3 matrix as outlined by the above figures.
+
+```{r}
+computeDeterminant = function(x = matrix)
+{
+  for (i in 1:ncol(x))
+  {
+    if (i == 1)
+    {
+      a = x[1,1] * ((x[2,2] * x[3,3])-(x[2,3] * x[3,2]));
+    }
+    if (i == 2)
+    {
+      b = x[1,2] * ((x[2,1] * x[3,3])-(x[2,3] * x[3,1]));
+    }
+    if (i == 3)
+    {
+      c = x[1,3] * ((x[2,1] * x[3,2])-(x[3,1] * x[2,2]));
+    }
+  }
+  det3 = a - b + c;
+  print(det3)
+}
+```
+```{r}
+matrix1 <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, ncol = 3);
+computeDeterminant(matrix1); # solves for determinant of matrix1
+det(matrix1); #R base function that solves for determinant, used to test computeDeterminant accuracy
+```
+```{r}
+matrix2 <- matrix(c(4, 0, 3, 1, 3, 1, 9, 4, 1), nrow = 3, ncol = 3);
+computeDeterminant(matrix2);
+det(matrix2);
+```
+```{r}
+matrix3 <- matrix(c(1, 0, 0, 8, 1, 2, 5, 4, 2), nrow = 3, ncol = 3);
+computeDeterminant(matrix3);
+det(matrix3);
+```
+
+The above examples demonstrate three random matrices. The computeDeterminant function is than ran for all three, returning the values of their respective determinants. The det() function was also used to verify that the computeDeterminant function was returning the right values. As can be seen, computeDeterminant() and det() produce the same results for all three sample matrices, and would produce the same results for any 3x3 matrix that is plugged into the functions. 
