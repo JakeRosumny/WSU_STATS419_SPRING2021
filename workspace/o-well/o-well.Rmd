@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r, eval=FALSE} 
+#this code chunk contains the functions that will be necessary to reading and analyzing the text documents
+
+which.github = "local"; #determines whether local or remote github is being used (this case will use local)
+
+github.local = "C:/_git_/github/JakeRosumny/WSU_STATS419_SPRING2021/" #local directory of github on my PC
+github.remote = "https://github.com/JakeRosumny/WSU_STATS419_SPRING2021/" #remote github directory
+
+# the following if/else loop determines where to call data from depending on if local or remote github is used. 
+if(which.github == "remote")
+{
+    mypath = paste0(github.remote,"datasets/")
+    
+  
+  } else {
+           mypath = paste0(github.local,"datasets/")
+          }
+
+
+path.oWellData = paste0(mypath, "o-well/");
+```
+
+
+
+
+```{r, include=TRUE}
+library(tabulizer); # allows for code to read info from PDF's
+
+dataWellPDF = paste0(path.oWellData, "Well-23.pdf");
+dataWell = extract_tables(dataWellPDF);
+owell.metals = data.frame(dataWell[1]);
+owell.chemistry = data.frame(dataWell[2]);
+names(owell.metals) <- owell.metals[1,];
+names(owell.chemistry) <- owell.chemistry[1,];
+owell.metals <- owell.metals[-1];
+owell.chemistry <- owell.chemistry[-1];
+owell.metals = owell.metals[-c(1,2,26,27,28,29,30,31),];
+owell.chemistry <- owell.chemistry [-c(1,2,20,21,22,23,29,30,31,32),];
+rownames(owell.metals) = NULL;
+rownames(owell.chemistry) = NULL;
+print(owell.metals);
+print(owell.chemistry);
+
+
+
+
+
+```

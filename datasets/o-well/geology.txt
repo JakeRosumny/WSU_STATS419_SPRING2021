@@ -1,0 +1,24 @@
+geology
+Sand
+Sand, Alkaline, Granite
+Alkaline, Conglomerate
+Alkaline
+Volcanic rock,Granite
+Volcanic rock
+Gypsum
+Alkaline
+Gypsum
+Volcanic rock
+Alkaline,Granite
+Granite
+Gypsum
+Gypsum
+Volcanic rock
+Alkaline,Granite,Volcanic rock
+Conglomerate,Gypsum
+Sand
+Sand
+Sand
+Sand
+Sand
+Alkaline,Granite
