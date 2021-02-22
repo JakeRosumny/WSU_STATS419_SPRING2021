@@ -96,7 +96,7 @@ print(owell.chemistry);
 Now that all relevant well data has been incorporated into the data frames, a list can be generated and saved in an RDS format. This process can be done as detailed by the following code chunk:
 
 ```{r, include=TRUE}
-listWellDF = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$chemistry"=owell.metals);
+listWellDF = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$metals"=owell.metals);
 #creates a list that contains all the information present in each data frame
 print(listWellDF);
 saveRDS(listWellDF, file = "wells.rds"); # saves a RDS file named "wells.rds"
